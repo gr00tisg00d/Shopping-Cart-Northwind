@@ -9,6 +9,8 @@ public class ProductController : Controller
   public IActionResult Index(int id)
   {
     ViewBag.id = id;
+    ViewBag.isCustomer = User?.Identity?.IsAuthenticated == true
+      && _dataContext.Customers.Any(c => c.Email == User.Identity.Name);
     return View(_dataContext.Categories.OrderBy(c => c.CategoryName));
   }
 }
