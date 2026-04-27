@@ -1,0 +1,498 @@
+{
+  "Version": 1,
+  "ManifestType": "Build",
+  "Endpoints": [
+    {
+      "Route": "DELETE FROM [dbo].oi32khc9dm.sql",
+      "AssetFile": "DELETE FROM [dbo].sql",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "44"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"UPZwbAIO7ac2+WRKSH58+P7CJNf5CHVFujIWould/UU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Apr 2026 13:58:22 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "oi32khc9dm"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-UPZwbAIO7ac2+WRKSH58+P7CJNf5CHVFujIWould/UU="
+        },
+        {
+          "Name": "label",
+          "Value": "DELETE FROM [dbo].sql"
+        }
+      ]
+    },
+    {
+      "Route": "DELETE FROM [dbo].sql",
+      "AssetFile": "DELETE FROM [dbo].sql",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "44"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"UPZwbAIO7ac2+WRKSH58+P7CJNf5CHVFujIWould/UU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Apr 2026 13:58:22 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-UPZwbAIO7ac2+WRKSH58+P7CJNf5CHVFujIWould/UU="
+        }
+      ]
+    },
+    {
+      "Route": "INSERT INTO [__EFMigrationsHistory] ([Mi.rp8vho8u7y.sql",
+      "AssetFile": "INSERT INTO [__EFMigrationsHistory] ([Mi.sql",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "120"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IbFzRRzx7vrOZ4AIXwLpNn22jGU50gGEBucjdp2CddU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Apr 2026 13:58:24 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "rp8vho8u7y"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-IbFzRRzx7vrOZ4AIXwLpNn22jGU50gGEBucjdp2CddU="
+        },
+        {
+          "Name": "label",
+          "Value": "INSERT INTO [__EFMigrationsHistory] ([Mi.sql"
+        }
+      ]
+    },
+    {
+      "Route": "INSERT INTO [__EFMigrationsHistory] ([Mi.sql",
+      "AssetFile": "INSERT INTO [__EFMigrationsHistory] ([Mi.sql",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "120"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IbFzRRzx7vrOZ4AIXwLpNn22jGU50gGEBucjdp2CddU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Apr 2026 13:58:24 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-IbFzRRzx7vrOZ4AIXwLpNn22jGU50gGEBucjdp2CddU="
+        }
+      ]
+    },
+    {
+      "Route": "SELECT TOP (1000) [CustomerId].addpe0s9vx.sql",
+      "AssetFile": "SELECT TOP (1000) [CustomerId].sql",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "231"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7t2hbiU5m1BqIZ2V4BrHIKtrGI4n7jrJuJs5oZ9U05A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Apr 2026 13:58:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "addpe0s9vx"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-7t2hbiU5m1BqIZ2V4BrHIKtrGI4n7jrJuJs5oZ9U05A="
+        },
+        {
+          "Name": "label",
+          "Value": "SELECT TOP (1000) [CustomerId].sql"
+        }
+      ]
+    },
+    {
+      "Route": "SELECT TOP (1000) [CustomerId].sql",
+      "AssetFile": "SELECT TOP (1000) [CustomerId].sql",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "231"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7t2hbiU5m1BqIZ2V4BrHIKtrGI4n7jrJuJs5oZ9U05A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Apr 2026 13:58:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-7t2hbiU5m1BqIZ2V4BrHIKtrGI4n7jrJuJs5oZ9U05A="
+        }
+      ]
+    },
+    {
+      "Route": "client.5gi560n155.css",
+      "AssetFile": "client.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1336"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"W50weCB/68DR0OHKJ6ZRsSHueajU5rWzCEN3N+XRF9o=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 27 Apr 2026 13:52:57 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "5gi560n155"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-W50weCB/68DR0OHKJ6ZRsSHueajU5rWzCEN3N+XRF9o="
+        },
+        {
+          "Name": "label",
+          "Value": "client.css"
+        }
+      ]
+    },
+    {
+      "Route": "client.css",
+      "AssetFile": "client.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1336"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"W50weCB/68DR0OHKJ6ZRsSHueajU5rWzCEN3N+XRF9o=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 27 Apr 2026 13:52:57 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-W50weCB/68DR0OHKJ6ZRsSHueajU5rWzCEN3N+XRF9o="
+        }
+      ]
+    },
+    {
+      "Route": "discount.js",
+      "AssetFile": "discount.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "610"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"DbVJEDG3lJHiiUv0EMd+r2+8s2z+3/ojld+biThmA78=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 06 Apr 2026 13:14:18 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-DbVJEDG3lJHiiUv0EMd+r2+8s2z+3/ojld+biThmA78="
+        }
+      ]
+    },
+    {
+      "Route": "discount.zo3xuzjh1i.js",
+      "AssetFile": "discount.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "610"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"DbVJEDG3lJHiiUv0EMd+r2+8s2z+3/ojld+biThmA78=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 06 Apr 2026 13:14:18 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "zo3xuzjh1i"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-DbVJEDG3lJHiiUv0EMd+r2+8s2z+3/ojld+biThmA78="
+        },
+        {
+          "Name": "label",
+          "Value": "discount.js"
+        }
+      ]
+    },
+    {
+      "Route": "product.8wqcujglw4.js",
+      "AssetFile": "product.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4090"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2KLv0hps56O3lnz1SZZPFWA52chdJA8yQ1IZB7ueUI0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 27 Apr 2026 14:10:16 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "8wqcujglw4"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-2KLv0hps56O3lnz1SZZPFWA52chdJA8yQ1IZB7ueUI0="
+        },
+        {
+          "Name": "label",
+          "Value": "product.js"
+        }
+      ]
+    },
+    {
+      "Route": "product.js",
+      "AssetFile": "product.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4090"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2KLv0hps56O3lnz1SZZPFWA52chdJA8yQ1IZB7ueUI0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 27 Apr 2026 14:10:16 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-2KLv0hps56O3lnz1SZZPFWA52chdJA8yQ1IZB7ueUI0="
+        }
+      ]
+    }
+  ]
+}

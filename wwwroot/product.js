@@ -8,9 +8,17 @@ document.getElementById("CategoryId").addEventListener("change", (e) => {
 document.getElementById('Discontinued').addEventListener("change", (e) => {
     fetchProducts();
 });
+
+const cartModalElement = document.getElementById('cartModal');
+const cartModal = new bootstrap.Modal(cartModalElement);
+
 // delegated event listener
 document.getElementById('product_rows').addEventListener("click", (e) => {
-    p = e.target.parentElement;
+    const p = e.target.closest('tr.product');
+    if (!p) {
+        return;
+    }
+
     if (p.classList.contains('product')) {
         e.preventDefault()
         // console.log(p.dataset['id']);
@@ -19,7 +27,7 @@ document.getElementById('product_rows').addEventListener("click", (e) => {
             document.getElementById('ProductName').innerHTML = p.dataset['name'];
             document.getElementById('UnitPrice').innerHTML = Number(p.dataset['price']).toFixed(2);
             display_total();
-            const cart = new bootstrap.Modal('#cartModal', {}).show();
+            cartModal.show();
         } else {
             // alert("Only signed in customers can add items to the cart");
             toast("Access Denied", "You must be signed in as a customer to access the cart.");
@@ -60,17 +68,26 @@ async function fetchProducts() {
 }
 document.getElementById('addToCart').addEventListener("click", (e) => {
     // hide modal
-    const cart = bootstrap.Modal.getInstance(document.getElementById('cartModal')).hide();
+    cartModal.hide();
     // use axios post to add item to cart
-    item = {
+    const item = {
         "id": Number(document.getElementById('ProductId').innerHTML),
         "email": document.getElementById('User').dataset['email'],
         "qty": Number(document.getElementById('Quantity').value)
-    }
+    };
+
     postCartItem(item);
 });
+
 async function postCartItem(item) {
-    axios.post('../../api/addtocart', item).then(res => {
-        toast("Product Added", `${res.data.product.productName} successfully added to cart.`);
-    });
+    try {
+        const res = await axios.post('../../api/addtocart', item);
+        const productName = res.data?.product?.productName ?? document.getElementById('ProductName').innerHTML;
+        toast("Product Added", `${productName} successfully added to cart.`);
+    } catch (error) {
+        const message = typeof error.response?.data === 'string'
+            ? error.response.data
+            : 'Unable to add that product to the cart.';
+        toast("Cart Error", message);
+    }
 }
