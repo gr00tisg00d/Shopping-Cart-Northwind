@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
- [Authorize(Roles = "northwind-customer")]
- public class CartController : Controller
+[Authorize(Roles = "northwind-customer")]
+public class CartController : Controller
 {
     private readonly DataContext _dataContext;
 
@@ -25,4 +25,45 @@ using Microsoft.EntityFrameworkCore;
 
         return View(cartItems);
     }
+
+
+    [HttpPost]
+    public IActionResult UpdateQuantity(int cartItemId, int quantity)
+    {
+        var item = _dataContext.CartItems.Include(c => c.Product).FirstOrDefault(c => c.CartItemId == cartItemId);
+
+        if (item == null)
+        {
+            return NotFound();
+        }
+        if (quantity <= 0)
+        {
+            _dataContext.CartItems.Remove(item);
+        }
+        else
+        {
+            item.Quantity = quantity;
+        }
+
+        _dataContext.SaveChanges();
+
+        return Json(new { success = true });
+    }
+
+    [HttpPost]
+    public IActionResult RemoveItem(int cartItemId)
+    {
+        var item = _dataContext.CartItems.FirstOrDefault(c => c.CartItemId == cartItemId);
+
+        if (item == null)
+        {
+            return NotFound();
+        }
+
+        _dataContext.CartItems.Remove(item);
+        _dataContext.SaveChanges();
+
+        return Json(new { success = true });
+    }
+
 }

@@ -1,35 +1,91 @@
 @model IEnumerable<CartItem>
 
-    <h2>Shipping Cart</h2>
+<h2>Shopping Cart</h2>
 
-    @if (!Model.Any())
-    {
-        <div class="alert alert-info">
-            Your cart is empty. 
-        </div>
-    }
-
-    else
-    {
-        <table class="table-hover">
-            <thead>
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        Your cart is empty.
+    </div>
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th class="text-end">Price</th>
+                <th class="text-end">Quantity</th>
+                <th class="text-end">Subtotal</th>
+                <th class="text-end">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
                 <tr>
-                    <th>Product</th>
-                    <th class="text-end">Price</th>
-                    <th class="text-end">Quantity</th>
-                    <th class="text-end">Subtotal</th>
+                    <td>@item.Product.ProductName</td>
+                    <td class="text-end">@item.Product.UnitPrice.ToString("C")</td>
+
+                    <td class="text-end">
+                        <input
+                            type="number"
+                            class="form-control quantity-input text-end"
+                            value="@item.Quantity"
+                            min="1"
+                            data-cart-item-id="@item.CartItemId" />
+                    </td>
+
+                    <td class="text-end">
+                        @((item.Product.UnitPrice * item.Quantity).ToString("C"))
+                    </td>
+
+                    <td class="text-end">
+                        <button
+                            class="btn btn-sm btn-danger remove-item"
+                            data-cart-item-id="@item.CartItemId">
+                            Remove
+                        </button>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.Product.ProductName</td>
-                        <td class="text-end">@item.Product.UnitPrice.ToString("C")</td>
-                        <td class="text-end">@item.Quantity</td>
-                        <td class="text-end">@((item.Product.UnitPrice * item.Quantity).ToString("C"))</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
+            }
+        </tbody>
+    </table>
+}
+
+@section Scripts {
+    <script>
+        document.querySelectorAll(".quantity-input").forEach(input => {
+            input.addEventListener("change", async function () {
+                const cartItemId = this.dataset.cartItemId;
+                const quantity = this.value;
+
+                await fetch("/Cart/UpdateQuantity", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: `cartItemId=${cartItemId}&quantity=${quantity}`
+                });
+
+                location.reload();
+            });
+        });
+
+        document.querySelectorAll(".remove-item").forEach(button => {
+            button.addEventListener("click", async function () {
+                const cartItemId = this.dataset.cartItemId;
+
+                await fetch("/Cart/RemoveItem", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: `cartItemId=${cartItemId}`
+                });
+
+                location.reload();
+            });
+        });
+    </script>
+}
