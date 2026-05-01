@@ -12,7 +12,7 @@ public class CartController : Controller
         _dataContext = db;
     }
 
-    public IActionResult Index()
+   public IActionResult Index()
     {
         var customer = _dataContext.Customers.FirstOrDefault(c => c.Email == User.Identity.Name);
 
@@ -23,9 +23,15 @@ public class CartController : Controller
 
         var cartItems = _dataContext.CartItems.Include(c => c.Product).Where(c => c.CustomerId == customer.CustomerId).ToList();
 
+        var productIds = cartItems.Select(c => c.ProductId).ToList();
+
+         var activeDiscounts = _dataContext.Discounts.Where(d => productIds.Contains(d.ProductId) && d.StartTime <= DateTime.Now &&
+            d.EndTime > DateTime.Now).ToDictionary(d => d.ProductId, d => d);
+
+            ViewBag.ActiveDiscounts = activeDiscounts;
+
         return View(cartItems);
     }
-
 
     [HttpPost]
     public IActionResult UpdateQuantity(int cartItemId, int quantity)
@@ -65,5 +71,4 @@ public class CartController : Controller
 
         return Json(new { success = true });
     }
-
 }
