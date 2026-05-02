@@ -83,6 +83,13 @@ else
             }
         </tbody>
     </table>
+
+    <form asp-controller="Cart" asp-action="Checkout" method="post" class="text-end mt-3">
+        <button type="submit" class="btn btn-success">
+            Checkout!
+        </button>
+
+    </form>
 }
 
 @section Scripts {
