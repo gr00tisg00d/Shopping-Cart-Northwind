@@ -57,4 +57,11 @@ public class DataContext : DbContext
     cartItem.Product = Products.Find(cartItem.ProductId);
     return cartItem;
   }
+
+    // Order details use 2 primary keys, so we need to override the OnModelCreating method to specify the composite key
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<OrderDetail>().HasKey( od => new { od.OrderId, od.ProductId });
+    }
 }
