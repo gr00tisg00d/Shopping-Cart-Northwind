@@ -2,8 +2,15 @@
 
 @{
     var activeDiscounts = ViewBag.ActiveDiscounts as Dictionary<int, Discount>;
+    var grandTotal = Model.Any() ? Model.Sum(item => {
+        decimal dp = 0;
+        if (activeDiscounts != null && activeDiscounts.ContainsKey(item.ProductId))
+            dp = activeDiscounts[item.ProductId].DiscountPercent;
+        return item.Product.UnitPrice * (1 - dp) * item.Quantity;
+    }) : 0;
 }
 
+<div class="mx-auto mt-3" style="max-width:860px">
 <h2>Shopping Cart</h2>
 @if (!Model.Any())
 {
@@ -62,7 +69,8 @@ else
                     <td class="text-end">
                         <input
                             type="number"
-                            class="form-control quantity-input text-end"
+                            class="form-control quantity-input text-end ms-auto"
+                            style="width:70px"
                             value="@item.Quantity"
                             min="1"
                             data-cart-item-id="@item.CartItemId" />
@@ -76,14 +84,22 @@ else
                         <button
                             class="btn btn-sm btn-danger remove-item"
                             data-cart-item-id="@item.CartItemId">
-                            Remove
+                            <i class="bi bi-trash"></i>
                         </button>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
+
+    <div class="d-flex justify-content-end align-items-center gap-3 mt-3">
+        <span class="fs-5 fw-bold">Total: @grandTotal.ToString("C")</span>
+        <a class="btn btn-success" asp-controller="Cart" asp-action="Checkout">
+            <i class="bi bi-credit-card"></i> Proceed to Checkout
+        </a>
+    </div>
 }
+</div>
 
 @section Scripts {
     <script>

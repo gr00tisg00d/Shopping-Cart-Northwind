@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
-[Authorize(Roles = "northwind-customer")]
+[Authorize]
 public class CartController : Controller
 {
     private readonly DataContext _dataContext;
@@ -12,7 +12,7 @@ public class CartController : Controller
         _dataContext = db;
     }
 
-   public IActionResult Index()
+    public IActionResult Index()
     {
         var customer = _dataContext.Customers.FirstOrDefault(c => c.Email == User.Identity.Name);
 
@@ -25,10 +25,10 @@ public class CartController : Controller
 
         var productIds = cartItems.Select(c => c.ProductId).ToList();
 
-         var activeDiscounts = _dataContext.Discounts.Where(d => productIds.Contains(d.ProductId) && d.StartTime <= DateTime.Now &&
-            d.EndTime > DateTime.Now).ToDictionary(d => d.ProductId, d => d);
+        var activeDiscounts = _dataContext.Discounts.Where(d => productIds.Contains(d.ProductId) && d.StartTime <= DateTime.Now &&
+           d.EndTime > DateTime.Now).ToDictionary(d => d.ProductId, d => d);
 
-            ViewBag.ActiveDiscounts = activeDiscounts;
+        ViewBag.ActiveDiscounts = activeDiscounts;
 
         return View(cartItems);
     }
@@ -70,5 +70,10 @@ public class CartController : Controller
         _dataContext.SaveChanges();
 
         return Json(new { success = true });
+    }
+
+    public IActionResult Checkout()
+    {
+        return View();
     }
 }

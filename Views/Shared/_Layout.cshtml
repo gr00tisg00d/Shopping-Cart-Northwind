@@ -69,15 +69,11 @@
                                             </ul>
                                         </li>
                                     </ul>
+                                    <a class="btn btn-primary btn-sm d-flex align-items-center gap-1 me-2" asp-controller="Cart" asp-action="Index">
+                                        <i class="bi bi-cart"></i> View Cart
+                                    </a>
                                     @if (User?.Identity?.IsAuthenticated ?? false)
                                     {
-                                        @if (User.IsInRole("northwind-customer"))
-                                        {
-                                            <a class="nav-link d-flex" asp-controller="Cart" asp-action="Index">
-                                                <i class="bi bi-cart"></i> Cart
-                                            </a>
-                                        }
-
                                         <a class="nav-link d-flex" asp-controller="Account" asp-action="Logout">
                                             <i class="bi bi-door-closed"></i> Sign Out
                                         </a>
