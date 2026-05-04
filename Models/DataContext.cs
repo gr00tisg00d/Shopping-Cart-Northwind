@@ -14,6 +14,12 @@ public class DataContext : DbContext
 
   public DbSet<OrderDetail> OrderDetails { get; set; }
 
+  protected override void OnModelCreating(ModelBuilder modelBuilder)
+  {
+    modelBuilder.Entity<OrderDetail>()
+      .HasKey(od => new { od.OrderId, od.ProductId });
+  }
+
   public void AddCustomer(Customer customer)
   {
     Customers.Add(customer);

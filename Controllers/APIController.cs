@@ -24,6 +24,13 @@ namespace Northwind.Controllers
         public IEnumerable<Product> GetByCategoryDiscontinued(int CategoryId, bool discontinued) => _dataContext.Products.Where(p => p.CategoryId == CategoryId && p.Discontinued == discontinued).OrderBy(p => p.ProductName);
         [HttpPost, Route("api/addtocart")]
         // adds a row to the cartitem table
-        public CartItem Post([FromBody] CartItemJSON cartItem) => _dataContext.AddToCart(cartItem);
+        public IActionResult Post([FromBody] CartItemJSON cartItem)
+        {
+            var item = _dataContext.AddToCart(cartItem);
+            var total = _dataContext.CartItems
+                .Where(c => c.CustomerId == item.CustomerId)
+                .Sum(c => c.Quantity);
+            return Ok(new { productName = item.Product.ProductName, totalItems = total });
+        }
     }
 }
