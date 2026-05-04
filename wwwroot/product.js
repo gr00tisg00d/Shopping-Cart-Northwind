@@ -11,24 +11,23 @@ document.getElementById('Discontinued').addEventListener("change", (e) => {
 
 // delegated event listener
 document.getElementById('product_rows').addEventListener("click", (e) => {
-    const p = e.target.closest('tr.product');
-    if (!p) {
-        return;
-    }
+    const btn = e.target.closest('.add-to-cart-btn');
+    if (!btn) return;
 
-    if (p.classList.contains('product')) {
-        e.preventDefault();
-        if (document.getElementById('User').dataset['customer'].toLowerCase() == "true") {
-            const item = {
-                "id": Number(p.dataset['id']),
-                "email": document.getElementById('User').dataset['email'],
-                "qty": 1,
-                "name": p.dataset['name']
-            };
-            postCartItem(item);
-        } else {
-            toast("Access Denied", "You must be signed in as a customer to access the cart.");
-        }
+    const p = btn.closest('tr.product');
+    if (!p) return;
+
+    e.preventDefault();
+    if (document.getElementById('User').dataset['customer'].toLowerCase() == "true") {
+        const item = {
+            "id": Number(p.dataset['id']),
+            "email": document.getElementById('User').dataset['email'],
+            "qty": 1,
+            "name": p.dataset['name']
+        };
+        postCartItem(item);
+    } else {
+        toast("Access Denied", "You must be signed in as a customer to access the cart.");
     }
 });
 const toast = (header, message) => {
@@ -48,8 +47,9 @@ async function fetchProducts() {
     fetchedProducts.map(product => {
         const css = product.discontinued ? " discontinued" : "";
         product_rows +=
-            `<tr class="product${css}" data-id="${product.productId}" data-name="${product.productName}" data-price="${product.unitPrice}">
-        <td>${product.productName}</td>
+            `<tr class="product${css} align-middle fs-5" data-id="${product.productId}" data-name="${product.productName}" data-price="${product.unitPrice}">
+        <td style="width:1px" class="ps-2"><button class="btn btn-sm btn-primary add-to-cart-btn" title="Add to cart"><i class="bi bi-cart"></i></button></td>
+        <td class="ps-1">${product.productName}</td>
         <td class="text-end">${product.unitPrice.toFixed(2)}</td>
         <td class="text-end">${product.unitsInStock}</td>
       </tr>`;
