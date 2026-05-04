@@ -1,0 +1,52 @@
+@model Order
+
+<div class="mx-auto mt-3" style="max-width:860px">
+    <div class="alert alert-success">
+        <h4 class="alert-heading"><i class="bi bi-check-circle"></i> Order Placed!</h4>
+        <p>Thank you for your order. Your order number is <strong>#@Model.OrderId</strong>.</p>
+    </div>
+
+    <h5 class="text-muted">Order Details</h5>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th class="text-end">Unit Price</th>
+                <th class="text-end">Discount</th>
+                <th class="text-end">Qty</th>
+                <th class="text-end">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var detail in Model.OrderDetails)
+            {
+                var discountedPrice = detail.UnitPrice * (1 - (decimal)detail.Discount);
+                var subtotal = discountedPrice * detail.Quantity;
+                <tr>
+                    <td>@detail.Product.ProductName</td>
+                    <td class="text-end">@detail.UnitPrice.ToString("C")</td>
+                    <td class="text-end">
+                        @if (detail.Discount > 0)
+                        {
+                            <span class="badge bg-success">@detail.Discount.ToString("P0") off</span>
+                        }
+                        else { <span>&mdash;</span> }
+                    </td>
+                    <td class="text-end">@detail.Quantity</td>
+                    <td class="text-end">@subtotal.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @{
+        var total = Model.OrderDetails.Sum(d => d.UnitPrice * (1 - (decimal)d.Discount) * d.Quantity);
+    }
+    <div class="d-flex justify-content-end mb-4">
+        <span class="fs-5 fw-bold">Total: @total.ToString("C")</span>
+    </div>
+
+    <a class="btn btn-primary" asp-controller="Product" asp-action="Category">
+        <i class="bi bi-cart"></i> Continue Shopping
+    </a>
+</div>

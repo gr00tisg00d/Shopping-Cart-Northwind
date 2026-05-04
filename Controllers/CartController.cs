@@ -74,6 +74,92 @@ public class CartController : Controller
 
     public IActionResult Checkout()
     {
-        return View();
+        var customer = _dataContext.Customers.FirstOrDefault(c => c.Email == User.Identity.Name);
+        if (customer == null) return RedirectToAction("Login", "Account");
+
+        var cartItems = _dataContext.CartItems
+            .Include(c => c.Product)
+            .Where(c => c.CustomerId == customer.CustomerId)
+            .ToList();
+
+        if (!cartItems.Any()) return RedirectToAction("Index");
+
+        var productIds = cartItems.Select(c => c.ProductId).ToList();
+        var activeDiscounts = _dataContext.Discounts
+            .Where(d => productIds.Contains(d.ProductId) && d.StartTime <= DateTime.Now && d.EndTime > DateTime.Now)
+            .ToDictionary(d => d.ProductId, d => d);
+
+        ViewBag.ActiveDiscounts = activeDiscounts;
+        ViewBag.Customer = customer;
+        return View(cartItems);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult PlaceOrder()
+    {
+        var customer = _dataContext.Customers.FirstOrDefault(c => c.Email == User.Identity.Name);
+        if (customer == null) return RedirectToAction("Login", "Account");
+
+        var cartItems = _dataContext.CartItems
+            .Include(c => c.Product)
+            .Where(c => c.CustomerId == customer.CustomerId)
+            .ToList();
+
+        if (!cartItems.Any()) return RedirectToAction("Index");
+
+        var productIds = cartItems.Select(c => c.ProductId).ToList();
+        var activeDiscounts = _dataContext.Discounts
+            .Where(d => productIds.Contains(d.ProductId) && d.StartTime <= DateTime.Now && d.EndTime > DateTime.Now)
+            .ToDictionary(d => d.ProductId, d => d);
+
+        var order = new Order
+        {
+            CustomerId = customer.CustomerId,
+            Customer = customer.CompanyName,
+            OrderDate = DateTime.Now,
+            ShipName = customer.CompanyName,
+            ShipAddress = customer.Address,
+            ShipCity = customer.City,
+            ShipRegion = customer.Region,
+            ShipPostalCode = customer.PostalCode,
+            ShipCountry = customer.Country,
+            Freight = 0
+        };
+
+        _dataContext.Orders.Add(order);
+        _dataContext.SaveChanges();
+
+        foreach (var item in cartItems)
+        {
+            decimal discount = activeDiscounts.ContainsKey(item.ProductId)
+                ? activeDiscounts[item.ProductId].DiscountPercent
+                : 0;
+
+            _dataContext.OrderDetails.Add(new OrderDetail
+            {
+                OrderId = order.OrderId,
+                ProductId = item.ProductId,
+                UnitPrice = item.Product.UnitPrice,
+                Quantity = (short)item.Quantity,
+                Discount = discount
+            });
+        }
+
+        _dataContext.CartItems.RemoveRange(cartItems);
+        _dataContext.SaveChanges();
+
+        return RedirectToAction("OrderConfirmation", new { orderId = order.OrderId });
+    }
+
+    public IActionResult OrderConfirmation(int orderId)
+    {
+        var order = _dataContext.Orders
+            .Include(o => o.OrderDetails)
+            .ThenInclude(od => od.Product)
+            .FirstOrDefault(o => o.OrderId == orderId);
+
+        if (order == null) return NotFound();
+        return View(order);
     }
 }
