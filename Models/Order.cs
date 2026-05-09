@@ -11,7 +11,7 @@ public class Order
     public DateTime OrderDate { get; set; }
     public DateTime? RequiredDate { get; set; }
     public DateTime? ShippedDate { get; set; }
-    public string ShipVia { get; set; }
+    public int? ShipVia { get; set; }
 
     [Column(TypeName = "decimal(19, 4)")]
     
@@ -22,7 +22,7 @@ public class Order
     public string ShipRegion { get; set; }
     public string ShipPostalCode { get; set; }
     public string ShipCountry { get; set; }
-    public string Customer { get; set; }
+    public Customer Customer { get; set; }
 
    public ICollection<OrderDetail> OrderDetails { get; set; }
 
