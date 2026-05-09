@@ -68,10 +68,10 @@
             <i class="bi bi-arrow-left"></i> Back to Cart
         </a>
         <form method="post" asp-controller="Cart" asp-action="PlaceOrder">
-            @Html.AntiForgeryToken()
-            <button type="submit" class="btn btn-success">
-                <i class="bi bi-credit-card"></i> Place Order
-            </button>
-        </form>
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-success">
+        <i class="bi bi-credit-card"></i> Place Order
+    </button>
+</form>
     </div>
 </div>

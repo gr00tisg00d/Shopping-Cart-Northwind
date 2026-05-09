@@ -128,6 +128,7 @@ public class CartController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult PlaceOrder()
     {
+       
         var customer = _dataContext.Customers
             .FirstOrDefault(c => c.Email == User.Identity.Name);
 
@@ -201,7 +202,8 @@ public class CartController : Controller
         _dataContext.SaveChanges();
 
         return RedirectToAction("OrderConfirmation", new { orderId = order.OrderId });
-    }
+
+    }   
 
     public IActionResult OrderConfirmation(int orderId)
     {

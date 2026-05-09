@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-[Table("Order Details")]
+[Table("OrderDetails")]
 public class OrderDetail
 {
     public int OrderId { get; set;}
