@@ -1,0 +1,77 @@
+@model IEnumerable<CartItem>
+
+@{
+    var activeDiscounts = ViewBag.ActiveDiscounts as Dictionary<int, Discount>;
+    var customer = ViewBag.Customer as Customer;
+    var grandTotal = Model.Sum(item => {
+        decimal dp = activeDiscounts != null && activeDiscounts.ContainsKey(item.ProductId)
+            ? activeDiscounts[item.ProductId].DiscountPercent : 0;
+        return item.Product.UnitPrice * (1 - dp) * item.Quantity;
+    });
+}
+
+<div class="mx-auto mt-3" style="max-width:860px">
+    <h2>Checkout</h2>
+    <h5 class="text-muted">Order Summary</h5>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th class="text-end">Unit Price</th>
+                <th class="text-end">Discount</th>
+                <th class="text-end">Qty</th>
+                <th class="text-end">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                Discount discount = null;
+                decimal discountPercent = 0;
+                if (activeDiscounts != null && activeDiscounts.ContainsKey(item.ProductId))
+                {
+                    discount = activeDiscounts[item.ProductId];
+                    discountPercent = discount.DiscountPercent;
+                }
+                var subtotal = item.Product.UnitPrice * (1 - discountPercent) * item.Quantity;
+                <tr>
+                    <td>@item.Product.ProductName</td>
+                    <td class="text-end">@item.Product.UnitPrice.ToString("C")</td>
+                    <td class="text-end">
+                        @if (discount != null)
+                        {
+                            <span class="badge bg-success">@discount.DiscountPercent.ToString("P0") off</span>
+                        }
+                        else { <span>—</span> }
+                    </td>
+                    <td class="text-end">@item.Quantity</td>
+                    <td class="text-end">@subtotal.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-end mb-4">
+        <span class="fs-5 fw-bold">Total: @grandTotal.ToString("C")</span>
+    </div>
+
+    <h5 class="text-muted">Ship To</h5>
+    <p>
+        <strong>@customer?.CompanyName</strong><br />
+        @customer?.Address<br />
+        @customer?.City, @customer?.Region @customer?.PostalCode<br />
+        @customer?.Country
+    </p>
+
+    <div class="d-flex gap-2 mt-3">
+        <a class="btn btn-secondary" asp-controller="Cart" asp-action="Index">
+            <i class="bi bi-arrow-left"></i> Back to Cart
+        </a>
+        <form method="post" asp-controller="Cart" asp-action="PlaceOrder">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-success">
+                <i class="bi bi-credit-card"></i> Place Order
+            </button>
+        </form>
+    </div>
+</div>
