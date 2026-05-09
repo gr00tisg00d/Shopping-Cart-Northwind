@@ -1,13 +1,6 @@
 @model IEnumerable<Category>
 <div id="User" style="display:none;" data-email="@User.Identity.Name" data-customer="@ViewBag.isCustomer.ToString().ToLower()"></div>
 
-<div class="alert alert-warning">
-    Logged in: @(User?.Identity?.IsAuthenticated == true) <br />
-    Email: @User.Identity.Name <br />
-    Is customer role: @User.IsInRole("northwind-customer") <br />
-    ViewBag isCustomer: @ViewBag.isCustomer
-</div>
-
 <table class="table table-hover">
   <thead>
     <tr>
