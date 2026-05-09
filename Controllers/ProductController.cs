@@ -10,7 +10,8 @@ public class ProductController : Controller
   {
     ViewBag.id = id;
     ViewBag.isCustomer = User?.Identity?.IsAuthenticated == true
-      && _dataContext.Customers.Any(c => c.Email == User.Identity.Name);
+      && User.IsInRole("northwind-customer");
+      
     return View(_dataContext.Categories.OrderBy(c => c.CategoryName));
   }
 }
